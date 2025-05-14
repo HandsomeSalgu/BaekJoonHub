@@ -21,39 +21,18 @@ public class Main{
         //배열
         ArrayList<Integer> list = new ArrayList<>();
 
-        //가장 작은 숫자
-        int min = 0;
-
-        //가장 큰 숫자
-        int max = 0;
-
-        //가장 큰 숫자와 가장 작은 숫자를 따로 넣어주고
         //List 안에 배열 담기
         for(int i = 0; i<N; i++){
             String str2 = br.readLine();
             int num = Integer.parseInt(str2);
             list.add(num);
-
-            //첫번째에 숫자 넣어주기
-            if(i == 0){
-                min = num;
-                max = num;
-            }else{
-                if(min > num){
-                    min = num;
-                }
-
-                if(max < num){
-                    max = num;
-                }
-            }
         }
 
         Collections.sort(list);
 
         for(int i = 0; i<N; i++){
             bw.write(list.get(i) + "");
-            if(min != max){
+            if(i != N-1){
                 bw.write("\n");
             } 
         }
