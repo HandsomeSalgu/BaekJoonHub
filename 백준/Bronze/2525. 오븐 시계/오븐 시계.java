@@ -1,25 +1,27 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 public class Main {
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws IOException{
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
-        Scanner sc = new Scanner(System.in);
+        String hourMin = br.readLine();
+        int hour = Integer.parseInt((hourMin.split(" "))[0]);
+        int min = Integer.parseInt((hourMin.split(" "))[1]);
 
-        int A = sc.nextInt();
-        int B = sc.nextInt();
-        int C = sc.nextInt();
+        int pass = Integer.parseInt(br.readLine());
 
-        int CH = C/60; 
-        int CM = C%60;
+        int time = hour * 60 + min + pass;
+        hour = (time / 60) % 24;
+        min = time % 60;
 
-        if(A+CH < 24 && B+CM < 60){
-            System.out.println((A+CH) + " " + (B+CM));
-        }else if(A+CH < 24 && B+CM >= 60){
-            System.out.println(((A+CH)+1 == 24 ? 0 : (A+CH)+1) + " " + Math.abs(60-(B+CM)));
-        }else if(A+CH >= 24 && B+CM < 60){
-            System.out.println(Math.abs(24-(A+CH)) + " " + (B+CM));
-        }else{
-            System.out.println((Math.abs(23-(A+CH)) == 24 ? 0 : Math.abs(23-(A+CH))) + " " + Math.abs(60-(B+CM)));
-        }
+        bw.write(hour + " " + min);
+
+        bw.flush();
     }
 }
