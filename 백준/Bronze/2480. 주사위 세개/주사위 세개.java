@@ -1,31 +1,40 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 public class Main {
-    public static void main(String[] args) {
-        
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException{
+    
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int a = sc.nextInt();
-        int b = sc.nextInt();
-        int c = sc.nextInt();
+        String bString = br.readLine();
 
-        if(a == b && b == c && c == a){
-            System.out.println(10000+(a*1000));
-        }else if(a != b && b != c && c != a){
-            int result = a > b ? (a>c ? a : (b>c ? b : c)) : (b > c ? b : (c > a ? c : a));
-            System.out.println(result*100);
+        String[] bStrArr = bString.split(" ");
+
+        int a = Integer.parseInt(bStrArr[0]);
+        int b = Integer.parseInt(bStrArr[1]);
+        int c = Integer.parseInt(bStrArr[2]);
+
+        int result = 0;
+
+        if(a==b && b==c && c==a){
+            result = 10000 + 1000*a;
+        }else if(a!=b && b!=c && c!=a){
+            result = 100 * (Math.max(Math.max(a,b),c));
         }else{
-            if(a == b && a !=c){
-                System.out.println(1000 + (a*100));
-                return;
-            }
-            if(a == c && a !=b){
-                System.out.println(1000 + (a*100));
-                return;
+            if(a==b){
+                result = 1000 + 100 * a;
+            }else if(a==c){
+                result = 1000 + 100 * a;
             }else{
-                System.out.println(1000 + (b*100));
-                return;
+                result = 1000 + 100 * b;
             }
         }
+
+        bw.write(result + "");
+        bw.flush();
     }
 }
